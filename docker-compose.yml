@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  backend:
+    image: leoalvesjf/backend:latest
+    container_name: backend
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=xaodrescan_db
+      - DB_USER=xaodrescan_user
+      - DB_PASSWORD=xaodrescan_password
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=xaodrescan_jwt_secret_2024
+      - JWT_EXPIRES_IN=7d
+    depends_on:
+      - db
+      - redis
+    networks:
+      - sitemanga_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: sitemanga-nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./:/usr/share/nginx/html:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - sitemanga_net
+
+  db:
+    image: postgres:15
+    container_name: sitemanga-db
+    environment:
+      POSTGRES_USER: xaodrescan_user
+      POSTGRES_PASSWORD: xaodrescan_password
+      POSTGRES_DB: xaodrescan_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sitemanga_net
+
+  redis:
+    image: redis:7
+    container_name: sitemanga-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sitemanga_net
+
+volumes:
+  db_data:
+
+networks:
+  sitemanga_net:
+    driver: bridge

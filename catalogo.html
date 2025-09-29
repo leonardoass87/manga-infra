@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteManga - Catálogo</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="asset/logo.png" alt="SiteManga" class="logo-img">
+                        <span class="logo-text">Xaodrescan</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="catalogo.html" class="nav-link active">Catálogo</a></li>
+                        <li><a href="#" class="nav-link" id="lancamentos-link">Lançamentos</a></li>
+                        <li><a href="admin.html" class="nav-link" id="admin-link" style="display: none;">Admin</a></li>
+                        <li><a href="login.html" class="nav-link" id="auth-link">Login</a></li>
+                    </ul>
+                    <div class="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Catálogo de Mangás</h1>
+                <p class="page-subtitle">Explore nossa coleção completa de mangás</p>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters">
+            <div class="container">
+                <div class="filters-wrapper">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Buscar mangás..." class="search-input">
+                        <button class="search-btn" id="search-btn">🔍</button>
+                    </div>
+                    <div class="filter-options">
+                        <select id="status-filter" class="filter-select">
+                            <option value="">Todos os Status</option>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Finalizado">Finalizado</option>
+                        </select>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="title">Ordenar por Título</option>
+                            <option value="chapters">Ordenar por Capítulos</option>
+                            <option value="status">Ordenar por Status</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Section -->
+        <section class="catalog">
+            <div class="container">
+                <div class="catalog-header">
+                    <div class="results-info">
+                        <span id="results-count">Carregando...</span>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">⊞</button>
+                        <button class="view-btn" data-view="list">☰</button>
+                    </div>
+                </div>
+                
+                <div class="manga-catalog" id="manga-catalog">
+                    <!-- Mangás serão carregados via JavaScript -->
+                    <div class="loading">Carregando mangás...</div>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Paginação será adicionada via JavaScript se necessário -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para detalhes do mangá -->
+    <div class="modal" id="manga-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Título do Mangá</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-manga-info">
+                    <img id="modal-cover" src="" alt="Capa do mangá" class="modal-cover">
+                    <div class="modal-details">
+                        <p id="modal-description">Descrição do mangá...</p>
+                        <div class="modal-stats">
+                            <div class="stat-item">
+                                <strong>Capítulos:</strong> <span id="modal-chapters">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Status:</strong> <span id="modal-status">-</span>
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn btn-primary">Começar a Ler</button>
+                            <button class="btn btn-secondary">Adicionar aos Favoritos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SiteManga</h3>
+                    <p>Sua plataforma favorita para mangás</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>Email: contato@sitemanga.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SiteManga. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/catalog.js"></script>
+</body>
+</html>

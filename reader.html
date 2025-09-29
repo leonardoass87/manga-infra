@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Mangá - SiteManga</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="reader-progress">
+        <div class="reader-progress-bar"></div>
+        <div class="progress-indicator" id="progressIndicator">0%</div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" title="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Simple Mobile Navigation - Tema Premium -->
+    <div class="simple-mobile-nav" id="simpleMobileNav">
+        <button class="simple-nav-btn prev" id="simplePrevChapter">
+            ← Anterior
+        </button>
+        <button class="simple-nav-btn next" id="simpleNextChapter">
+            Próximo →
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-wrapper">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="asset/logo.png" alt="SiteManga" class="logo-img">
+                    <span class="logo-text">SiteManga</span>
+                </a>
+            </div>
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Início</a></li>
+                <li><a href="catalogo.html" class="nav-link">Catálogo</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Reader Section -->
+    <section class="reader-section" id="reader">
+        <div class="container">
+            <!-- Reader Header -->
+            <div class="reader-header">
+                <div class="reader-info">
+                    <h1 class="reader-title" id="manga-title">Carregando...</h1>
+                    <p class="reader-chapter" id="chapter-title">Capítulo 1</p>
+                </div>
+                <div class="reader-controls">
+                    <button class="btn btn-outline" id="back-to-manga">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Mangá
+                    </button>
+                    <button class="btn btn-primary" id="toggle-fullscreen">
+                        <i class="fas fa-expand"></i> Tela Cheia
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reader Navigation -->
+            <div class="reader-navigation">
+                <button class="nav-btn prev-btn" id="prev-chapter" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Capítulo Anterior</span>
+                </button>
+                
+                <div class="chapter-selector">
+                    <select id="chapter-select">
+                        <option value="">Selecionar Capítulo</option>
+                    </select>
+                </div>
+                
+                <button class="nav-btn next-btn" id="next-chapter">
+                    <span>Próximo Capítulo</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Reader Content -->
+            <div class="reader-content" id="reader-content">
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando capítulo...</p>
+                </div>
+            </div>
+
+            <!-- Reader Footer -->
+            <div class="reader-footer">
+                <!-- Footer content removed for simplicity -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Carregando página...</p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="error-modal" id="error-modal">
+        <div class="error-content">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Erro ao Carregar</h3>
+            <p id="error-message">Não foi possível carregar o capítulo.</p>
+            <button class="btn btn-primary" onclick="location.reload()">Tentar Novamente</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/reader.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+name: Deploy Sitemanga
+
+on:
+  push:
+    branches:
+      - master   # dispara quando fizer push na master
+
+jobs:
+  deploy:
+    runs-on: self-hosted   # usa o runner da sua VM
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar Docker
+        run: |
+          docker compose down
+          docker compose up -d --build

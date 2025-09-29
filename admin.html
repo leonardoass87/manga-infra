@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - SiteManga</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="asset/logo.png" alt="SiteManga" class="logo-img">
+                        <span class="logo-text">Xaodrescan</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="catalogo.html" class="nav-link">Catálogo</a></li>
+                        <li><a href="#" class="nav-link" id="lancamentos-link">Lançamentos</a></li>
+                        <li><a href="admin.html" class="nav-link active">Admin</a></li>
+                        <li><a href="#" class="nav-link" id="logout-btn">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="container">
+            <!-- Admin Header -->
+            <div class="admin-header">
+                <h1 class="admin-title">Painel Administrativo</h1>
+                <p class="admin-subtitle">Gerencie mangás, capítulos e conteúdo</p>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Buscar mangás..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="manage-users-btn">
+                        👥 Gerenciar Usuários
+                    </button>
+                    <button class="btn btn-primary" id="add-manga-btn">
+                        ➕ Adicionar Mangá
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <h3 id="total-mangas">0</h3>
+                        <p>Total de Mangás</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📖</div>
+                    <div class="stat-content">
+                        <h3 id="total-chapters">0</h3>
+                        <p>Total de Capítulos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <h3 id="latest-mangas">0</h3>
+                        <p>Lançamentos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manga Grid -->
+            <div class="manga-grid-container" id="manga-section">
+                <div class="grid-header">
+                    <h2>Mangás Cadastrados</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="latest">Lançamentos</button>
+                        <button class="filter-btn" data-filter="ongoing">Em Andamento</button>
+                        <button class="filter-btn" data-filter="completed">Finalizados</button>
+                    </div>
+                </div>
+                <div class="manga-grid" id="manga-grid">
+                    <div class="loading">Carregando mangás...</div>
+                </div>
+            </div>
+
+            <!-- Users Management Section -->
+            <div class="users-management-container" id="users-section" style="display: none;">
+                <div class="grid-header">
+                    <div class="section-header">
+                        <h2>Gerenciar Usuários</h2>
+                        <button class="btn btn-secondary" id="back-to-mangas-btn">
+                            ← Voltar aos Mangás
+                        </button>
+                    </div>
+                    <div class="user-stats">
+                        <span class="user-count">Total: <span id="total-users">0</span></span>
+                        <span class="admin-count">Admins: <span id="admin-count">0</span></span>
+                    </div>
+                </div>
+                <div class="users-grid" id="users-grid">
+                    <div class="loading">Carregando usuários...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para Adicionar/Editar Mangá -->
+    <div class="modal" id="manga-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Adicionar Mangá</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <form id="manga-form" class="manga-form">
+                <div class="form-group">
+                    <label for="manga-title">Título do Mangá</label>
+                    <input type="text" id="manga-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="manga-description">Descrição</label>
+                    <textarea id="manga-description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="manga-cover-file">Capa do Mangá</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="manga-cover-file" name="cover" accept="image/*" required>
+                        <div class="file-upload-preview" id="cover-preview" style="display: none;">
+                            <img id="cover-preview-img" src="" alt="Preview da capa">
+                            <button type="button" class="remove-file-btn" id="remove-cover">&times;</button>
+                        </div>
+                        <div class="file-upload-placeholder" id="cover-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Clique para selecionar a capa do mangá</p>
+                            <small>Formatos aceitos: JPG, PNG, WEBP, GIF</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="manga-status">Status</label>
+                        <select id="manga-status" name="status" required>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Finalizado">Finalizado</option>
+                            <option value="Pausado">Pausado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="manga-latest" name="isLatest">
+                            <span class="checkmark"></span>
+                            Marcar como lançamento
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Seção de Capítulos -->
+                <div class="chapters-section">
+                    <div class="section-header">
+                        <h3>Capítulos</h3>
+                        <button type="button" class="btn btn-secondary btn-sm" id="add-chapter-btn">
+                            <i class="fas fa-plus"></i> Adicionar Capítulo
+                        </button>
+                    </div>
+                    <div class="chapters-container" id="chapters-container">
+                        <!-- Capítulos serão adicionados dinamicamente -->
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Mangá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <button class="modal-close" id="confirm-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir este mangá?</p>
+                <p><strong>Esta ação não pode ser desfeita.</strong></p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="confirm-cancel">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Usuário -->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Usuário</h2>
+                <button class="modal-close" id="user-modal-close">&times;</button>
+            </div>
+            <form id="user-form" class="user-form">
+                <div class="form-group">
+                    <label for="user-name">Nome</label>
+                    <input type="text" id="user-name" name="name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="user-username">Username</label>
+                    <input type="text" id="user-username" name="username" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email</label>
+                    <input type="email" id="user-email" name="email" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="user-role">Role</label>
+                    <select id="user-role" name="role" required>
+                        <option value="user">Usuário</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="user-cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão de Usuário -->
+    <div class="modal" id="user-confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão de Usuário</h2>
+                <button class="modal-close" id="user-confirm-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir este usuário?</p>
+                <p><strong>Esta ação não pode ser desfeita.</strong></p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="user-confirm-cancel">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="user-confirm-delete">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteManga - Cadastro</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="asset/logo.png" alt="SiteManga" class="logo-img">
+                        <span class="logo-text">Xaodrescan</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="catalogo.html" class="nav-link">Catálogo</a></li>
+                        <li><a href="#" class="nav-link" id="lancamentos-link">Lançamentos</a></li>
+                        <li><a href="login.html" class="nav-link" id="auth-link">Login</a></li>
+                    </ul>
+                    <div class="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="login-section">
+            <div class="container">
+                <div class="login-wrapper">
+                    <div class="login-card">
+                        <div class="login-header">
+                            <h2>Criar Conta no SiteManga</h2>
+                            <p>Preencha os dados para criar sua conta</p>
+                        </div>
+                        
+                        <form class="login-form" id="register-form">
+                            <div class="form-group">
+                                <label for="name">Nome Completo</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="username">Nome de Usuário</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" required minlength="6">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmar Senha</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-full">Criar Conta</button>
+                            </div>
+                            
+                            <div class="form-message" id="form-message"></div>
+                        </form>
+                        
+                        <div class="login-footer">
+                            <p>Já tem uma conta? <a href="login.html" class="register-link">Faça login aqui</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="login-info">
+                        <h3>Junte-se à nossa comunidade!</h3>
+                        <p>Ao criar uma conta, você terá acesso a:</p>
+                        <ul>
+                            <li>✓ Marcar mangás como favoritos</li>
+                            <li>✓ Acompanhar progresso de leitura</li>
+                            <li>✓ Receber notificações de novos capítulos</li>
+                            <li>✓ Acesso a conteúdo exclusivo</li>
+                            <li>✓ Participar da comunidade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SiteManga</h3>
+                    <p>Sua plataforma favorita para mangás</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>Email: contato@sitemanga.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SiteManga. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
