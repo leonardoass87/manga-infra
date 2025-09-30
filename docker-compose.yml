@@ -2,7 +2,9 @@ version: "3.9"
 
 services:
   backend:
-    image: leoalvesjf/backend:latest
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
     container_name: backend
     ports:
       - "4000:4000"
